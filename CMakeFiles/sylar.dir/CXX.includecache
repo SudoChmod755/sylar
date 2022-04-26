@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/sz123/workspace/sylar/sylar/log.cc
+log.h
+/home/sz123/workspace/sylar/sylar/log.h
+map
+-
+functional
+-
+
+/home/sz123/workspace/sylar/sylar/log.h
+string
+-
+stdint.h
+-
+memory
+-
+list
+-
+sstream
+-
+fstream
+-
+iostream
+-
+vector
+-
+tuple
+-
+ctime
+-
+
