@@ -35,6 +35,8 @@ namespace sylar{
         };
 
 
+
+
 //-----------------
 
     Logger:: Logger(const std:: string& name):m_name(name),m_level(LogLevel:: DEBUG)
@@ -83,7 +85,9 @@ namespace sylar{
 //------------------
 
 
-    FileLogAppender:: FileLogAppender(const std:: string& fname):m_filename(fname) {}
+    FileLogAppender:: FileLogAppender(const std:: string& fname):m_filename(fname) {
+        m_filestream.open(m_filename);
+    }
 
     void FileLogAppender:: log(Logger:: ptr pt, LogLevel:: Level level,LogEvent:: ptr event)  {
         if(level>=m_level){
@@ -382,6 +386,52 @@ namespace sylar{
             m_file(file),m_line(line),m_threadId(thread),m_elapse(elapse),m_fiberId(fiber),
             m_time(time),m_threadName(threadName)
             {}
+
+    void LogEvent:: format(const char* fmt, ...){
+        va_list al;
+        va_start(al,fmt);
+        format(fmt,al);
+        va_end(al);
+
+    }
+
+    void LogEvent:: format(const char* fmt,va_list al){
+        char* buf=nullptr;
+        int len=vasprintf(&buf,fmt,al);
+        if(len!=-1){
+            m_ss<<std::string(buf,len);
+            free(buf);            //UAF?
+            //printf("%d",buf);
+        }
+    }
+
+    //-----------------------------------
+
+    LogerManger:: LogerManger(){
+        m_root.reset(new Logger);
+        m_root->addappender(LogAppender:: ptr(new StdoutAppender));
+        m_loggers[m_root->getName()]=m_root;
+        init();
+
+    }
+
+    void LogerManger::init(){
+
+    }
+
+    Logger:: ptr LogerManger:: getLogger(const std:: string& name){
+        auto it=m_loggers.find(name);
+        if(it!=m_loggers.end()){
+            return it->second;
+        }
+        Logger:: ptr logger(new Logger(name));
+        logger->setRoot(m_root);
+        m_loggers[name]=logger;
+        return logger;     
+    }
+
+    
+
 
     
 

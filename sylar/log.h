@@ -11,6 +11,9 @@
 #include<vector>
 #include<tuple>
 #include<ctime>
+#include<cstdarg>
+#include<map>
+#include "singleton.h"
 
 #define SYLAR_LOG_LEVEL(logger,level) \
         if(logger->getlevel()<=level) \
@@ -26,6 +29,23 @@
 #define SYLAR_LOG_ERROR(logger)  SYLAR_LOG_LEVEL(logger,sylar::LogLevel::ERROR)
 
 #define SYLAR_LOG_FATAL(logger)  SYLAR_LOG_LEVEL(logger,sylar::LogLevel::FATAL)
+
+
+//   用格式化字符串输入log message
+#define SYLAR_FORMAT_LEVEL(logger,level,fmt,...) \
+        if(logger->getlevel()<=level)  \
+            sylar:: LogEventWrap(sylar::LogEvent:: ptr(new sylar:: LogEvent(logger,level, \
+            __FILE__,__LINE__,sylar::GetThreadId(),1,sylar::GetFiberId(),time(0),"szyshs"))).getEvent()->format(fmt,__VA_ARGS__) 
+
+#define SYLAR_FORMAT_DEBUG(logger,fmt, ...)  SYLAR_FORMAT_LEVEL(logger,sylar::LogLevel::DEBUG,fmt, __VA_ARGS__)
+
+#define SYLAR_FORMAT_INFO(logger,fmt, ...)  SYLAR_FORMAT_LEVEL(logger,sylar::LogLevel::INFO,fmt, __VA_ARGS__)
+
+#define SYLAR_FORMAT_WARN(logger,fmt, ...)  SYLAR_FORMAT_LEVEL(logger,sylar::LogLevel::WARN,fmt, __VA_ARGS__)
+
+#define SYLAR_FORMAT_ERROR(logger,fmt, ...)  SYLAR_FORMAT_LEVEL(logger,sylar::LogLevel::ERROR,fmt, __VA_ARGS__)
+
+#define SYLAR_FORMAT_FATAL(logger,fmt, ...)  SYLAR_FORMAT_LEVEL(logger,sylar::LogLevel::FATAL,fmt, __VA_ARGS__)
 
 namespace sylar{
 
@@ -82,7 +102,7 @@ namespace sylar{
             }
 
             std:: stringstream& getss()  {
-                return m_ss;
+                return m_ss;                  //这里是用来获取输入的
             }
 
             std:: string getthreadName() const {
@@ -96,6 +116,10 @@ namespace sylar{
             LogLevel:: Level getLevel() const {
                 return m_level;
             }
+
+            void format(const char* fmt, ...);
+
+            void format(const char* fmt,va_list al);
             
 
         private:
@@ -165,6 +189,15 @@ namespace sylar{
             LogFormatter:: ptr getFormatter(){
                 return m_logformatter;
             }
+
+            LogLevel:: Level getLevel(){
+                return m_level;
+            }
+
+            void setLevel(LogLevel:: Level level){
+                m_level=level;
+            }
+
         protected:
             LogLevel:: Level m_level;
             LogFormatter:: ptr m_logformatter;
@@ -199,11 +232,17 @@ namespace sylar{
             LogLevel:: Level getlevel(){
                 return m_level;
             }
+
+            void setRoot(Logger:: ptr root){
+                m_root=root;
+            }
+
         private:            
             std:: string m_name;   //日志名称
             LogLevel:: Level m_level;    //日志级别
             std:: list<LogAppender:: ptr> m_appender; //Appender集合  
             LogFormatter:: ptr m_formater;
+            Logger:: ptr m_root;
     };
 
     class StdoutAppender : public LogAppender{
@@ -226,7 +265,18 @@ namespace sylar{
         std:: ofstream m_filestream;
     };
 
-    
+    class LogerManger{
+        public:
+            LogerManger();
+            Logger:: ptr  getLogger(const std:: string& name);
+            void init();
+            Logger:: ptr  getRoot() const  {return m_root;}
+        private:
+            Logger:: ptr m_root;
+            std:: map<std::string,Logger:: ptr> m_loggers;
+    };
+
+    typedef sylar::SingleTonPtr<LogerManger> LogerMgr;
 }
 
 #endif

@@ -3,5 +3,6 @@
 
 CMakeFiles/test.dir/tests/test.cc.o
  /home/sz123/workspace/sylar/sylar/log.h
+ /home/sz123/workspace/sylar/sylar/singleton.h
  /home/sz123/workspace/sylar/sylar/util.h
  /home/sz123/workspace/sylar/tests/test.cc
