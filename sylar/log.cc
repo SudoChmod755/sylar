@@ -42,6 +42,7 @@ namespace sylar{
     Logger:: Logger(const std:: string& name):m_name(name),m_level(LogLevel:: DEBUG)
         {
         m_formater.reset(new LogFormatter("%d{%Y-%m-%d %H:%M:%S}%T%t%T%N%T%F%T[%p]%T[%c]%T%f:%l%T%m%n"));
+        //Logger 里面的formatter  如果addappender的appender没有指定formatter  则用logger里面的（这就是它的作用）
     }
     void Logger:: log(LogLevel::Level level,LogEvent:: ptr event){
         if(level>=m_level){
@@ -430,7 +431,7 @@ namespace sylar{
         return logger;     
     }
 
-    
+
 
 
     

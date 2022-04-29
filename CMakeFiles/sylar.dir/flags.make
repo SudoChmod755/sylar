@@ -6,5 +6,5 @@ CXX_FLAGS =  -rdynamic -g -O3 -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unus
 
 CXX_DEFINES = -Dsylar_EXPORTS
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/home/sz123/workspace/sylar/. -I/home/sz123/yaml-cpp/include 
 

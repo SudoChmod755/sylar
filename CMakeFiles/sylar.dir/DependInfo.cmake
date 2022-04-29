@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/sz123/workspace/sylar/sylar/config.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/config.cc.o"
   "/home/sz123/workspace/sylar/sylar/log.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/log.cc.o"
   "/home/sz123/workspace/sylar/sylar/util.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/util.cc.o"
   )
@@ -16,6 +17,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "."
+  "/home/sz123/yaml-cpp/include"
   )
 
 # Targets to which this target links.

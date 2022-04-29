@@ -47,6 +47,8 @@
 
 #define SYLAR_FORMAT_FATAL(logger,fmt, ...)  SYLAR_FORMAT_LEVEL(logger,sylar::LogLevel::FATAL,fmt, __VA_ARGS__)
 
+#define SYLAR_LOG_ROOT()  sylar::LogerMgr::GetInstance()->getRoot()
+
 namespace sylar{
 
     //日志级别
