@@ -20,7 +20,7 @@ namespace sylar {
                 ListAllMember(prefix.empty()? it->first.Scalar() : prefix+"."+it->first.Scalar() ,
                 it->second,node_list);
             }
-        }
+        }         //将node转化成  string - Node  map(string是完整名称用 . 分割)
     }
 
     void Config:: LoadFromYaml(const YAML::Node& root){
@@ -43,8 +43,8 @@ namespace sylar {
                     ss<< it.second;
                     conpt->fromstring(ss.str());
                 }
-            }
-        }
+            }           
+        }        //从yaml配置文件中 更改
     }
 
     
