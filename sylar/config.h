@@ -307,7 +307,7 @@ template<class T>
                 }
                 else{
                     for(auto& i: m_cbs){
-                        i.second(m_val,val);
+                        i.second(m_val,val);      //调用listener
                     }
                     m_val=val;
                 }
@@ -341,7 +341,7 @@ template<class T>
         typedef std:: map<std:: string,ConfigVarBase::ptr> ConfigVarMap;
 
         static ConfigVarMap& Getdatas(){
-            static ConfigVarMap s_datas;
+            static ConfigVarMap s_datas;          //和全局变量初始化的优先级是一样的
             return s_datas;
         }
 

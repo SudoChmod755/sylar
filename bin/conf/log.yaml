@@ -1,18 +1,20 @@
 logs:
     - name: root
-      level: info
+      level: INFO
       formatter: "%d%T%m%n"
       appender: 
           - type: FileLogAppender
             path: log.txt
           - type: StdoutLogAppender
     - name: system
-      level: debug
+      level: DEBUG
       formatter: "%d%T%m%n"
       appender:
           - type: FileLogAppender
             path: log.txt
           - type: StdoutLogAppender
+          - type: FileLogAppender
+            path: szyshs.txt
 
 system:
     port: 9900

@@ -49,6 +49,8 @@
 
 #define SYLAR_LOG_ROOT()  sylar::LogerMgr::GetInstance()->getRoot()
 
+#define SYLAR_LOG_NAME(name)  sylar::LogerMgr::GetInstance()->getLogger(name)
+
 namespace sylar{
 
     //日志级别
@@ -64,8 +66,9 @@ namespace sylar{
             };
         
         static const char* ToString (LogLevel:: Level level);
+        static const Level FromString(const std::string& str);
     };
-
+    class LogerManger;
     class Logger;
     //日志事件
     class LogEvent{
@@ -161,6 +164,9 @@ namespace sylar{
             std:: string format(std:: shared_ptr<Logger> pt, LogEvent:: ptr event,LogLevel:: Level level);
             LogFormatter(const std:: string& forma );
             void init();
+            bool isError() const {
+                return m_erro;
+            }
         public:
             class LogFormatItem{
             public:
@@ -169,11 +175,14 @@ namespace sylar{
                 virtual ~LogFormatItem() {}
                 virtual void format(std:: shared_ptr<Logger> pt ,std:: ostream& out,LogEvent:: ptr event,LogLevel:: Level level)=0;
             };
+
+
             
 
         private:
              std:: list<LogFormatItem:: ptr> m_items;
              std:: string m_pattern;
+             bool m_erro=false;
 
     };
 
@@ -209,6 +218,7 @@ namespace sylar{
 
     //日志器
     class Logger: public std:: enable_shared_from_this<Logger>{
+       friend class LogerManger;
        public:
             typedef std:: shared_ptr<Logger> ptr;
             Logger(const std:: string& name="root");
@@ -222,6 +232,10 @@ namespace sylar{
 
             void addappender(LogAppender:: ptr appender);
             void delappender(LogAppender:: ptr appender);
+            void clearappender();
+            void setFormatter(LogFormatter::ptr pt);
+            void setFormatter(const std::string& s);
+            LogFormatter::ptr getFormatter();
 
             LogLevel:: Level getlevel() const{return m_level;}
             void setlevel(LogLevel:: Level val) {
@@ -276,6 +290,7 @@ namespace sylar{
         private:
             Logger:: ptr m_root;
             std:: map<std::string,Logger:: ptr> m_loggers;
+            
     };
 
     typedef sylar::SingleTonPtr<LogerManger> LogerMgr;

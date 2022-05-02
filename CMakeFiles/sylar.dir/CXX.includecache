@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/sz123/workspace/sylar/sylar/config.cc
-config.h
-/home/sz123/workspace/sylar/sylar/config.h
-sstream
--
-
 /home/sz123/workspace/sylar/sylar/config.h
 memory
 -
@@ -35,6 +29,16 @@ set
 -
 list
 -
+
+/home/sz123/workspace/sylar/sylar/log.cc
+log.h
+/home/sz123/workspace/sylar/sylar/log.h
+map
+-
+functional
+-
+config.h
+/home/sz123/workspace/sylar/sylar/config.h
 
 /home/sz123/workspace/sylar/sylar/log.h
 string

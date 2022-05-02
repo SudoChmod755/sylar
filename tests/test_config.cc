@@ -19,6 +19,7 @@ class Person{
             m_sex==ohs.m_sex;
         }
 };
+
 sylar::ConfigVar<Person>:: ptr p_person=sylar::Config::Lookup("class.person.k",Person(),"system_person");
 
 sylar::ConfigVar<int>:: ptr p_sys_port=sylar::Config::Lookup("system.port",(int)8080,"system_port");
@@ -124,7 +125,7 @@ namespace sylar{
                 node["sex"] =p.m_sex;
                 std::stringstream ss;  
                 ss<<node;
-                return ss.str();        
+                return ss.str();          //都是以node（yaml形式的字符串为中转）
             }
 
     };
@@ -136,17 +137,21 @@ void test_class(const YAML::Node& node){
     });
     SYLAR_LOG_INFO(SYLAR_LOG_ROOT())<<"before "<< p_person->getVal().ToString()<<" - "<< p_person->Tostring();
     sylar::Config:: LoadFromYaml(node);
-    SYLAR_LOG_INFO(SYLAR_LOG_ROOT())<<"after "<< p_person->getVal().ToString()<<" - "<< p_person->Tostring();
+    SYLAR_LOG_INFO(SYLAR_LOG_NAME("system"))<<"after "<< p_person->getVal().ToString()<<" - "<< p_person->Tostring();
 
 }
+
 
 int main(int argc,char** argv){
     std::cout<<"hello config "<<std::endl;
     SYLAR_LOG_INFO(SYLAR_LOG_ROOT()) << p_sys_port->Tostring();
     YAML::Node root=YAML:: LoadFile("/home/sz123/workspace/sylar/bin/conf/log.yaml");
+    
     // print_yaml(root,0);
     //test_config(root);
     test_class(root);
+    
+
 
 
 }
