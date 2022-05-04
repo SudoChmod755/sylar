@@ -14,6 +14,7 @@
 #include<cstdarg>
 #include<map>
 #include "singleton.h"
+#include "thread.h"
 
 #define SYLAR_LOG_LEVEL(logger,level) \
         if(logger->getlevel()<=level) \
@@ -189,15 +190,18 @@ namespace sylar{
     
     //日志输出地
     class LogAppender{
-
+        friend class Logger;
         public:
+            typedef Mutex MutexType;
             typedef std:: shared_ptr<LogAppender> ptr;
             virtual ~LogAppender() {}
             virtual void log(std:: shared_ptr<Logger> pt,  LogLevel:: Level level,LogEvent:: ptr event)=0;
             void setFormatter(LogFormatter:: ptr val){
+                MutexType::Lock lock(m_mutex);
                 m_logformatter=val;
             }
             LogFormatter:: ptr getFormatter(){
+                MutexType::Lock lock(m_mutex);
                 return m_logformatter;
             }
 
@@ -209,9 +213,11 @@ namespace sylar{
                 m_level=level;
             }
 
+
         protected:
             LogLevel:: Level m_level;
             LogFormatter:: ptr m_logformatter;
+            MutexType m_mutex;
 
     };
 
@@ -220,6 +226,7 @@ namespace sylar{
     class Logger: public std:: enable_shared_from_this<Logger>{
        friend class LogerManger;
        public:
+            typedef Mutex MutexType;
             typedef std:: shared_ptr<Logger> ptr;
             Logger(const std:: string& name="root");
             void log(LogLevel::Level level,LogEvent:: ptr event);
@@ -256,6 +263,7 @@ namespace sylar{
         private:            
             std:: string m_name;   //日志名称
             LogLevel:: Level m_level;    //日志级别
+            MutexType m_mutex;
             std:: list<LogAppender:: ptr> m_appender; //Appender集合  
             LogFormatter:: ptr m_formater;
             Logger:: ptr m_root;
@@ -283,11 +291,13 @@ namespace sylar{
 
     class LogerManger{
         public:
+            typedef Mutex MutexType;
             LogerManger();
             Logger:: ptr  getLogger(const std:: string& name);
             void init();
             Logger:: ptr  getRoot() const  {return m_root;}
         private:
+            MutexType m_mutex;
             Logger:: ptr m_root;
             std:: map<std::string,Logger:: ptr> m_loggers;
             

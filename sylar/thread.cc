@@ -7,6 +7,28 @@ namespace sylar{
 
     static Logger::ptr g_logger=SYLAR_LOG_NAME("system");
 
+    Semaphore::Semaphore(uint32_t count){
+        if(sem_init( &m_semaphore, 0, count )){
+            throw std::logic_error("sem_init error");
+        }
+    }
+
+    Semaphore::~Semaphore(){
+            sem_destroy(&m_semaphore);
+    }
+    void Semaphore::wait(){
+        if(sem_wait(&m_semaphore)){
+            throw std::logic_error("sem_wait error");
+        }
+    }
+
+    void Semaphore::notify(){
+        if(sem_post(&m_semaphore)){
+            throw std::logic_error("sem_post error");
+        }
+    }
+
+
     Thread* Thread::GetThis(){
         return t_thread;
     }
@@ -50,6 +72,8 @@ namespace sylar{
             SYLAR_LOG_ERROR(g_logger)<<" pthread creat thread fail,rt="<<rt <<" name= "<<name;
             throw std::logic_error("pthread create error");
         }
+
+        m_semaphore.wait();
     }
 
     void* Thread::run(void *arg){
@@ -60,6 +84,8 @@ namespace sylar{
         pthread_setname_np(pthread_self(),temp->m_name.substr(0,15).c_str());
         std::function<void ()> cb;
         cb.swap(temp->m_cb);
+
+        temp->m_semaphore.notify();
         cb();
         return 0;
     }

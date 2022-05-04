@@ -92,13 +92,16 @@ namespace sylar{
     }
 
     void Logger:: addappender(LogAppender:: ptr appender){
+        MutexType::Lock lock(m_mutex);
         if(!appender->getFormatter()){
-            appender->setFormatter(m_formater);
+            MutexType::Lock ll(appender->m_mutex);
+            appender->m_logformatter=m_formater;
         }
        Logger:: m_appender.push_back(appender);
        
     }
     void Logger:: delappender(LogAppender:: ptr appender){
+        MutexType::Lock lock(m_mutex);
         for(auto it=m_appender.begin();
         it!=m_appender.end();++it){
             if(*it==appender)   m_appender.erase(it);
@@ -110,9 +113,11 @@ namespace sylar{
     }
 
     void Logger::setFormatter(LogFormatter::ptr pt){
+        MutexType::Lock lock(m_mutex);
         m_formater=pt;
     }
     void Logger::setFormatter(const std::string& s){
+        MutexType::Lock lock(m_mutex);
         LogFormatter:: ptr forma(new LogFormatter(s));
         if(forma->isError()){
             std::cout<<"Setformatter Logger name="<<m_name<<" value="<<s<<" Invalid"<<std::endl;  //这里增加了个检查
@@ -134,11 +139,13 @@ namespace sylar{
 
     void FileLogAppender:: log(Logger:: ptr pt, LogLevel:: Level level,LogEvent:: ptr event)  {
         if(level>=m_level){
+            MutexType::Lock lock(m_mutex);
             m_filestream<< m_logformatter->format(pt,event,level);
         }
     }
     
     bool FileLogAppender:: reopen(){
+        MutexType::Lock lock(m_mutex);
         if(m_filestream){
             m_filestream.close();
         }
@@ -147,6 +154,7 @@ namespace sylar{
     }
 
     void StdoutAppender:: log(Logger:: ptr pt,LogLevel:: Level level,LogEvent:: ptr event)  {
+        MutexType::Lock lock(m_mutex);
         if(level>=m_level){
             std:: cout<<m_logformatter->format(pt,event,level);
         }
@@ -464,6 +472,7 @@ namespace sylar{
     }
 
     Logger:: ptr LogerManger:: getLogger(const std:: string& name){
+        MutexType::Lock lock(m_mutex);
         auto it=m_loggers.find(name);
         if(it!=m_loggers.end()){
             return it->second;

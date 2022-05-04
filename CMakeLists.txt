@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 project(sylar)
 include(cmake/utils.cmake)
 set(CMAKE_VERBOSE_MAKEFILE ON)   #输出具体的信息
-set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -g -O3 -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function  -Wno-builtin-macro-redefined")
+set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -g -O0 -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function  -Wno-builtin-macro-redefined")
 set(LIB/SRC
     sylar/log.cc
     sylar/util.cc

@@ -1,37 +1,7 @@
 logs:
     - name: root
       level: INFO
-      formatter: "%d%T%m%n"
       appender: 
           - type: FileLogAppender
-            path: log.txt
-          - type: StdoutLogAppender
-    - name: system
-      level: DEBUG
-      formatter: "%d%T%m%n"
-      appender:
-          - type: FileLogAppender
-            path: log.txt
-          - type: StdoutLogAppender
-          - type: FileLogAppender
-            path: szyshs.txt
-
-system:
-    port: 9900
-    int_vec: [10,20]
-    int_list: [20,30]
-    int_set: [77,66,99]
-    int_unset: [77,66,99]
-    int_unmap: 
-          v: 10
-          v1: 20
-          v2: 30
-
-class:
-    person:
-           k:
-              name: szyshs
-              age: 21
-              sex: true
-    
+            path: mutex.txt
 
