@@ -2,6 +2,7 @@
 #include<sstream>
 namespace sylar {
     ConfigVarBase:: ptr Config::LookupConfBase(const std:: string& str){
+        RWMutexType::ReadLock lock(GetMutex());
         auto it=Getdatas().find(str);
         if(it==Getdatas().end()){
             return nullptr;

@@ -132,7 +132,7 @@ namespace sylar{
   
 };
 void test_class(const YAML::Node& node){
-    p_person->addListener(10,[](const Person& old_person,const Person& new_person){
+    p_person->addListener([](const Person& old_person,const Person& new_person){
         SYLAR_LOG_INFO(SYLAR_LOG_ROOT())<<"this is listener";
     });
     SYLAR_LOG_INFO(SYLAR_LOG_ROOT())<<"before "<< p_person->getVal().ToString()<<" - "<< p_person->Tostring();
@@ -151,7 +151,10 @@ int main(int argc,char** argv){
     //test_config(root);
     test_class(root);
     
-
+    sylar::Config::Visit([](sylar::ConfigVarBase::ptr var){
+        SYLAR_LOG_INFO(SYLAR_LOG_ROOT())<<"name="<<var->getName()<<" description="<<var->getDescrip()<<
+         " value="<<var->Tostring();
+    });
 
 
 }

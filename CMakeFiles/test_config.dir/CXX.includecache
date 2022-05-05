@@ -389,6 +389,8 @@ set
 -
 list
 -
+thread.h
+sylar/thread.h
 
 sylar/log.h
 string
@@ -436,6 +438,8 @@ pthread.h
 semaphore.h
 -
 stdint.h
+-
+atomic
 -
 
 sylar/util.h

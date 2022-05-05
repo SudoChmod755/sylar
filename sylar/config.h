@@ -11,6 +11,7 @@
 #include<unordered_set>
 #include<set>
 #include<list>
+#include "thread.h"
 
 namespace sylar{
 
@@ -266,6 +267,7 @@ template<class T>
     template<class T, class FromStr=LexicalCast<std::string,T>, class ToStr=LexicalCast<T,std::string> >
     class ConfigVar: public ConfigVarBase{
         public:
+            typedef RWMutex RWMutexType;
             typedef std:: shared_ptr<ConfigVar> ptr;
 
             typedef std:: function<void (const T& old_value,const T& new_value) > on_change_cb;
@@ -275,6 +277,7 @@ template<class T>
             std::string Tostring() override{
                 try{
                     //return boost::lexical_cast<std:: string>(m_val);
+                    RWMutexType::ReadLock lock(m_mutex);
                     return ToStr()(m_val);
                 }
                 catch(std:: exception& e){
@@ -299,9 +302,15 @@ template<class T>
                 return false;
             }
 
-            const T getVal() const {return m_val;}
+            const T getVal()  {
+                RWMutexType:: ReadLock lock(m_mutex);
+
+                return m_val;
+                }
 
             void setVal(const T& val) {
+            {
+                RWMutexType:: ReadLock lock(m_mutex);
                 if(val==m_val){
                     return ;
                 }
@@ -309,19 +318,27 @@ template<class T>
                     for(auto& i: m_cbs){
                         i.second(m_val,val);      //调用listener
                     }
-                    m_val=val;
                 }
+            }
+                RWMutexType::WriteLock lock(m_mutex);
+                m_val=val;
             }
 
             std:: string getTypename() const override {return TypeToname<T>() ;}
 
-            void addListener(uint64_t key, on_change_cb cb){
-                m_cbs[key]=cb;
+            uint64_t addListener(on_change_cb cb){
+                static uint64_t s_fun_id=0;
+                RWMutexType::WriteLock lock(m_mutex);
+                ++s_fun_id;
+                m_cbs[s_fun_id]=cb;
+                return s_fun_id;
             }
             void deleListener(uint64_t key){
+                RWMutexType:: WriteLock lock(m_mutex);
                 m_cbs.erase(key);
             }
             on_change_cb getListener(uint64_t key){
+                RWMutexType:: ReadLock lock(m_mutex);
                 auto it=m_cbs.find(key);
                 if(it==m_cbs.end()){
                     return nullptr;
@@ -334,19 +351,37 @@ template<class T>
         private:
             T m_val;
             std:: map<u_int64_t,on_change_cb> m_cbs;
+            RWMutexType m_mutex;
     };  
 
     class Config{
         public:
         typedef std:: map<std:: string,ConfigVarBase::ptr> ConfigVarMap;
+        typedef RWMutex RWMutexType;
 
+
+        
         static ConfigVarMap& Getdatas(){
             static ConfigVarMap s_datas;          //和全局变量初始化的优先级是一样的
             return s_datas;
         }
 
+        static RWMutexType& GetMutex(){
+            static RWMutexType s_mutex;
+            return s_mutex;
+        }
+
+        static void Visit(std::function<void(ConfigVarBase:: ptr)> cb){
+            RWMutexType::ReadLock lock(GetMutex());
+            ConfigVarMap& m=Getdatas();
+            for(auto it=m.begin();it!=m.end();it++){
+                cb(it->second);
+            }
+        }
+
         template<class T>
         static typename ConfigVar<T>::ptr Lookup(const std:: string& name,const T& defaut_value,const std:: string& des=""){
+            RWMutexType::WriteLock lock(GetMutex());
             auto it=Getdatas().find(name);
             if(it!=Getdatas().end()){
                 auto tmp=std:: dynamic_pointer_cast<ConfigVar<T> > (it->second);
@@ -375,6 +410,7 @@ template<class T>
 
         template<class T>
         static typename ConfigVar<T>::ptr Lookup(const std:: string& name){
+            RWMutexType::ReadLock lock(GetMutex());
             auto it=Getdatas().find(name);
             if(it==Getdatas().end()){
                 return nullptr;  

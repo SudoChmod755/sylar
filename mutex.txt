@@ -1,0 +1,28 @@
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:136	this is listener
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[system]	tests/test_config.cc:140	after [Person name=szyshs age=21 sex=1] - name: szyshs
+age: 21
+sex: true
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:155	name=class.person.k description=system_person value=name: szyshs
+age: 21
+sex: true
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:155	name=logs description=log-define value=- name: root
+  level: INFO
+  formatter: ""
+  appender:
+    - type: FileLogAppender
+      path: mutex.txt
+      level: UNKNOW
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:155	name=system.int_list description=system int list value=- 20
+- 30
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:155	name=system.int_set description=system int set value=- 66
+- 77
+- 99
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:155	name=system.int_unmap description=system int unmap value=v2: 30
+v1: 20
+v: 10
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:155	name=system.int_unset description=system int unset value=- 99
+- 66
+- 77
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:155	name=system.int_vec description=system int vec value=- 10
+- 20
+2022-05-05 20:38:18	48451	szyshs	0	[INFO]	[root]	tests/test_config.cc:155	name=system.port description=system_port value=9900

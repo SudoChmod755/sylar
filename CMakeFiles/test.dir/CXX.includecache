@@ -59,6 +59,8 @@ semaphore.h
 -
 stdint.h
 -
+atomic
+-
 
 sylar/util.h
 sys/syscall.h

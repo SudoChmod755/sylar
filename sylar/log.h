@@ -192,7 +192,7 @@ namespace sylar{
     class LogAppender{
         friend class Logger;
         public:
-            typedef Mutex MutexType;
+            typedef Spinlock MutexType;
             typedef std:: shared_ptr<LogAppender> ptr;
             virtual ~LogAppender() {}
             virtual void log(std:: shared_ptr<Logger> pt,  LogLevel:: Level level,LogEvent:: ptr event)=0;
@@ -226,7 +226,7 @@ namespace sylar{
     class Logger: public std:: enable_shared_from_this<Logger>{
        friend class LogerManger;
        public:
-            typedef Mutex MutexType;
+            typedef Spinlock MutexType;
             typedef std:: shared_ptr<Logger> ptr;
             Logger(const std:: string& name="root");
             void log(LogLevel::Level level,LogEvent:: ptr event);
@@ -287,11 +287,12 @@ namespace sylar{
         private:
         std:: string m_filename;
         std:: ofstream m_filestream;
+        uint64_t m_lastTime=0;
     };
 
     class LogerManger{
         public:
-            typedef Mutex MutexType;
+            typedef Spinlock MutexType;
             LogerManger();
             Logger:: ptr  getLogger(const std:: string& name);
             void init();

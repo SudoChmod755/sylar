@@ -6,6 +6,7 @@
 #include <pthread.h>
 #include<semaphore.h>
 #include<stdint.h>
+#include <atomic>
 namespace sylar{
     class Semaphore{
     public:
@@ -212,6 +213,45 @@ class NULLRWMutex{
     private:
         pthread_rwlock_t m_lock;
 
+};
+
+class Spinlock{
+public:
+    typedef ScopedLockImpl<Spinlock>  Lock;
+    Spinlock(){
+        pthread_spin_init(&m_mutex,0);
+    }
+    ~Spinlock(){
+        pthread_spin_destroy(&m_mutex);
+    }
+    void lock(){
+        pthread_spin_lock(&m_mutex);
+    }
+    void unlock(){
+        pthread_spin_unlock(&m_mutex);
+    }
+
+private:
+    pthread_spinlock_t m_mutex;
+};
+
+class CASLock{
+    public:
+        typedef ScopedLockImpl<CASLock> Lock;
+        CASLock(){
+            m_mutex.clear();
+        }
+        ~CASLock(){
+            
+        }
+        void lock(){
+            while(std::atomic_flag_test_and_set_explicit(&m_mutex,std::memory_order_acquire));
+        }
+        void unlock(){
+            std::atomic_flag_clear_explicit(&m_mutex,std::memory_order_release);
+        }
+    private:
+        volatile std::atomic_flag m_mutex;
 };
 
 

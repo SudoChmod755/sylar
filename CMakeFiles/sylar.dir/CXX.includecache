@@ -35,6 +35,8 @@ set
 -
 list
 -
+thread.h
+/home/sz123/workspace/sylar/sylar/thread.h
 
 /home/sz123/workspace/sylar/sylar/log.cc
 log.h
@@ -80,14 +82,6 @@ thread.h
 memory
 -
 
-/home/sz123/workspace/sylar/sylar/thread.cc
-thread.h
-/home/sz123/workspace/sylar/sylar/thread.h
-log.h
-/home/sz123/workspace/sylar/sylar/log.h
-util.h
-/home/sz123/workspace/sylar/sylar/util.h
-
 /home/sz123/workspace/sylar/sylar/thread.h
 thread
 -
@@ -100,6 +94,8 @@ pthread.h
 semaphore.h
 -
 stdint.h
+-
+atomic
 -
 
 /home/sz123/workspace/sylar/sylar/util.h

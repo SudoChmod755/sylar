@@ -134,11 +134,16 @@ namespace sylar{
 
 
     FileLogAppender:: FileLogAppender(const std:: string& fname):m_filename(fname) {
-        m_filestream.open(m_filename);
+        reopen();
     }
 
     void FileLogAppender:: log(Logger:: ptr pt, LogLevel:: Level level,LogEvent:: ptr event)  {
         if(level>=m_level){
+            uint64_t now=time(0);
+            if(now!=m_lastTime){
+                reopen();
+                m_lastTime=now;
+            }
             MutexType::Lock lock(m_mutex);
             m_filestream<< m_logformatter->format(pt,event,level);
         }
@@ -149,7 +154,7 @@ namespace sylar{
         if(m_filestream){
             m_filestream.close();
         }
-        m_filestream.open(m_filename);
+        m_filestream.open(m_filename,std::ios::app);
         return !!m_filestream;
     }
 
@@ -595,7 +600,7 @@ namespace sylar{
 
     struct LogerInit{
         LogerInit(){
-            g_log_defines->addListener(0x1234, [](const std::set<LogDefine>& old_value,const std::set<LogDefine>& new_value){
+            g_log_defines->addListener([](const std::set<LogDefine>& old_value,const std::set<LogDefine>& new_value){
                 SYLAR_LOG_INFO(SYLAR_LOG_ROOT())<<"on_logger_conf_changed";    //这个函数是参数lamda的实现
                 for(auto& i:new_value){
                     auto it=old_value.find(i);
