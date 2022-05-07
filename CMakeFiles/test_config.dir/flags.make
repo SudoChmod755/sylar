@@ -8,5 +8,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/home/sz123/workspace/sylar/. -I/home/sz123/yaml-cpp/include 
 
-# Custom defines: CMakeFiles/test_config.dir/tests/test_config.cc.o_DEFINES = __FILE__="tests/test_config.cc";__FILE__="tests/test_config.cc"
+# Custom defines: CMakeFiles/test_config.dir/tests/test_config.cc.o_DEFINES = __FILE__="tests/test_config.cc"
 

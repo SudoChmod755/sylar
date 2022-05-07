@@ -35,7 +35,9 @@ CMakeFiles/test_thread.dir/tests/test_thread.cc.o
  /home/sz123/yaml-cpp/include/yaml-cpp/traits.h
  /home/sz123/yaml-cpp/include/yaml-cpp/yaml.h
  sylar/config.h
+ sylar/fiber.h
  sylar/log.h
+ sylar/macro.h
  sylar/singleton.h
  sylar/sylar.h
  sylar/thread.h

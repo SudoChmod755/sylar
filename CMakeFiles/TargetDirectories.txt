@@ -1,4 +1,6 @@
+/home/sz123/workspace/sylar/CMakeFiles/test_fiber.dir
 /home/sz123/workspace/sylar/CMakeFiles/rebuild_cache.dir
+/home/sz123/workspace/sylar/CMakeFiles/test_util.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_config.dir
 /home/sz123/workspace/sylar/CMakeFiles/edit_cache.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_thread.dir
