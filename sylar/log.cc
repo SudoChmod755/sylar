@@ -282,6 +282,7 @@ namespace sylar{
         }
     };
 
+
     class ThreadNameFormaItem : public LogFormatter::LogFormatItem{
         public:
         ThreadNameFormaItem(const std::string& =""){}

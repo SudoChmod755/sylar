@@ -45,6 +45,7 @@ CMakeFiles/sylar.dir/sylar/fiber.cc.o
  /home/sz123/workspace/sylar/sylar/fiber.h
  /home/sz123/workspace/sylar/sylar/log.h
  /home/sz123/workspace/sylar/sylar/macro.h
+ /home/sz123/workspace/sylar/sylar/scheduler.h
  /home/sz123/workspace/sylar/sylar/singleton.h
  /home/sz123/workspace/sylar/sylar/thread.h
  /home/sz123/workspace/sylar/sylar/util.h
@@ -117,6 +118,15 @@ CMakeFiles/sylar.dir/sylar/log.cc.o
  /home/sz123/yaml-cpp/include/yaml-cpp/stlemitter.h
  /home/sz123/yaml-cpp/include/yaml-cpp/traits.h
  /home/sz123/yaml-cpp/include/yaml-cpp/yaml.h
+CMakeFiles/sylar.dir/sylar/scheduler.cc.o
+ /home/sz123/workspace/sylar/sylar/fiber.h
+ /home/sz123/workspace/sylar/sylar/log.h
+ /home/sz123/workspace/sylar/sylar/macro.h
+ /home/sz123/workspace/sylar/sylar/scheduler.cc
+ /home/sz123/workspace/sylar/sylar/scheduler.h
+ /home/sz123/workspace/sylar/sylar/singleton.h
+ /home/sz123/workspace/sylar/sylar/thread.h
+ /home/sz123/workspace/sylar/sylar/util.h
 CMakeFiles/sylar.dir/sylar/thread.cc.o
  /home/sz123/workspace/sylar/sylar/log.h
  /home/sz123/workspace/sylar/sylar/singleton.h

@@ -19,7 +19,7 @@
 #define SYLAR_LOG_LEVEL(logger,level) \
         if(logger->getlevel()<=level) \
             sylar:: LogEventWrap(sylar:: LogEvent:: ptr(new sylar::LogEvent(logger,level, \
-            __FILE__,__LINE__,sylar::GetThreadId(),1,sylar::GetFiberId(),time(0),"szyshs"))).getSS()
+            __FILE__,__LINE__,sylar::GetThreadId(),1,sylar::GetFiberId(),time(0),sylar::Thread::GetName()))).getSS()
 
 #define SYLAR_LOG_DEBUG(logger)  SYLAR_LOG_LEVEL(logger,sylar::LogLevel::DEBUG)
 
@@ -36,7 +36,7 @@
 #define SYLAR_FORMAT_LEVEL(logger,level,fmt,...) \
         if(logger->getlevel()<=level)  \
             sylar:: LogEventWrap(sylar::LogEvent:: ptr(new sylar:: LogEvent(logger,level, \
-            __FILE__,__LINE__,sylar::GetThreadId(),1,sylar::GetFiberId(),time(0),"szyshs"))).getEvent()->format(fmt,__VA_ARGS__) 
+            __FILE__,__LINE__,sylar::GetThreadId(),1,sylar::GetFiberId(),time(0),sylar::Thread::GetName() ))).getEvent()->format(fmt,__VA_ARGS__) 
 
 #define SYLAR_FORMAT_DEBUG(logger,fmt, ...)  SYLAR_FORMAT_LEVEL(logger,sylar::LogLevel::DEBUG,fmt, __VA_ARGS__)
 

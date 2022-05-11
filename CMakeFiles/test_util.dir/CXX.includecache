@@ -434,6 +434,18 @@ assert.h
 util.h
 sylar/util.h
 
+sylar/scheduler.h
+memory
+-
+fiber.h
+sylar/fiber.h
+thread.h
+sylar/thread.h
+vector
+-
+list
+-
+
 sylar/singleton.h
 memory
 -
@@ -453,6 +465,8 @@ thread.h
 sylar/thread.h
 fiber.h
 sylar/fiber.h
+scheduler.h
+sylar/scheduler.h
 
 sylar/thread.h
 thread
