@@ -39,7 +39,7 @@ namespace sylar{
     Scheduler* Scheduler::GetThis(){
         return t_scheduler;
     }
-    Fiber* Scheduler::GetMainFiber(){
+    Fiber* Scheduler:: GetMainFiber(){
         return t_fiber;
      }
 
@@ -56,11 +56,11 @@ namespace sylar{
              m_threadIds.push_back(m_threads[i]->getId());
          }
          lock.unlock();
-         if(m_rootFiber){
-             //m_rootFiber->swapIn();
-             m_rootFiber->call(); //main_fiber保存在fiber.cc中，rootfiber（run）是m_rootfiber
-             SYLAR_LOG_INFO(g_logger)<<"call out "<<m_rootFiber->getState();
-         }
+        //  if(m_rootFiber){
+        //      //m_rootFiber->swapIn();
+        //      m_rootFiber->call(); //main_fiber保存在fiber.cc中，rootfiber（run）是m_rootfiber
+        //      SYLAR_LOG_INFO(g_logger)<<"call out "<<m_rootFiber->getState();
+        //  }
      }
 
      void Scheduler::stop(){
@@ -91,6 +91,31 @@ namespace sylar{
          if(m_rootFiber ){
              tickle();
          }
+
+         if(m_rootFiber){
+            // while(!stopping()){
+            //     if(m_rootFiber->getState()==Fiber::TERM || m_rootFiber->getState()==Fiber::EXCEP){
+            //        m_rootFiber.reset(new Fiber(std::bind(&Scheduler::run,this),0,true));
+            //        SYLAR_LOG_INFO(g_logger)<<" root fiber is term, reset";
+            //        t_fiber=m_rootFiber.get();
+            //     }
+            //     m_rootFiber->call();
+            // }
+            if(!stopping()){       // 除了主协程以外的是否全部停止了(除了idle)
+                m_rootFiber->call();
+            }
+         }
+
+         std::vector<Thread::ptr> thrs;
+         {
+             MutexType::Lock lock(m_mutex);
+             thrs.swap(m_threads);
+         }
+
+         for(auto& i: thrs){
+             i->join();         //其他线程没结束时阻塞在这里。
+         }
+
          if(stopping()){
              return;
          }
@@ -101,11 +126,11 @@ namespace sylar{
      }
      void Scheduler::run(){
         SYLAR_LOG_INFO(g_logger)<<"szyshs run";
-        Fiber::GetThis();   //是run
+        Fiber::GetThis();   
         setThis();
         if(sylar::GetThreadId()!=m_rootThread)
         {
-            t_fiber=Fiber::GetThis().get();
+            t_fiber=Fiber::GetThis().get();   //子线程swapout的切换。
         }
 
         Fiber::ptr idle_fiber(new Fiber(std::bind(&Scheduler::idle,this)));
@@ -114,6 +139,7 @@ namespace sylar{
         while(true){
             ft.reset();
             bool tickle_me=false;
+            bool is_active=false;
             {
                 MutexType::Lock lock(m_mutex);
                 auto it=m_fibers.begin();
@@ -130,6 +156,8 @@ namespace sylar{
                     }
                     ft=*it;
                     m_fibers.erase(it);       //没有break也没++就double free
+                    ++m_activeThreadCount;
+                    is_active=true;
                     break;
                 }
             }
@@ -137,7 +165,7 @@ namespace sylar{
                 tickle();
             }
             if(ft.fiber && ft.fiber->getState()!=Fiber::TERM && ft.fiber->getState()!=Fiber::EXCEP){
-                ++m_activeThreadCount;
+                // ++m_activeThreadCount;
                 ft.fiber->swapIn();
                 --m_activeThreadCount;
                 if(ft.fiber->getState()==Fiber::READY){
@@ -157,7 +185,7 @@ namespace sylar{
                     cb_fiber.reset(new Fiber(ft.cb));     //id=3
                 }
                 ft.reset();
-                ++m_activeThreadCount;
+                // ++m_activeThreadCount;
                 cb_fiber->swapIn();
                 --m_activeThreadCount;
                 if(cb_fiber->getState()== Fiber::READY){
@@ -171,14 +199,18 @@ namespace sylar{
                     cb_fiber.reset();
                 }
             }
-            else{         //三个协程在切换额。。。
+            else{   
+                if(is_active){
+                    --m_activeThreadCount;
+                    continue;
+                }      
                 if(idle_fiber->getState()==Fiber::TERM){
                     SYLAR_LOG_INFO(g_logger)<<"idle fiber term";
                     //continue;
                     break;
                 }
                 m_idleThreadCount++;
-                idle_fiber->swapIn();        //二次swapIn导致never reach.(回到第一次swap_out的上下文)。
+                idle_fiber->swapIn();        
                 --m_idleThreadCount;
                 if(idle_fiber->getState()!=Fiber::TERM  && idle_fiber->getState()!=Fiber::EXCEP){
                     idle_fiber->m_state=Fiber::HOLD;
@@ -199,6 +231,9 @@ namespace sylar{
     }
     void Scheduler:: idle(){
         SYLAR_LOG_INFO(g_logger)<<"idle";
+        while(!stopping()){
+            sylar::Fiber::YieldToHold();   //没有stop的时候会在run和这里循环
+        }
     }
 
 

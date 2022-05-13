@@ -30,7 +30,7 @@ public:
             need_tickle=scheduleNoLock(fc,thread);
         }
         if(need_tickle){
-            tickle();
+            tickle();     //向空的里面加要tickle
         }
     }
 
