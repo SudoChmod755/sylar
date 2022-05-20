@@ -9,7 +9,7 @@ void test_fiber(){
     if(--s_count>=0)
     {
         sylar::Scheduler::GetThis()->schedule(&test_fiber,sylar::GetThreadId());
-        std::cout<<std::endl;
+        
     }
     
 }
