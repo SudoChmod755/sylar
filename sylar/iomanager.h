@@ -3,9 +3,10 @@
 
 #include "scheduler.h"
 #include <sys/epoll.h>
+#include "timer.h"
 namespace sylar {
     
-class IOManger : public Scheduler{
+class IOManger : public Scheduler, public TimerManager{
         public:
             typedef std::shared_ptr<IOManger> ptr;
             typedef RWMutex RWMutexType;
@@ -25,7 +26,7 @@ class IOManger : public Scheduler{
                 };
 
                 EventContext& getContext(Event event);
-                void resetContext(EventContext& ctx);
+                void resetContext(EventContext& ctx);   //成员置零。
                 void triggerEvent(Event event);
 
                 int fd=0;             //事件关联的句柄
@@ -49,11 +50,12 @@ class IOManger : public Scheduler{
         protected:
             void tickle() override;
             bool stopping() override;
+            bool stopping(uint64_t& timeout);
             void idle() override;
-
+            void onTimerInsertedAtFront() override;
             void contextResize(size_t size);
         private:
-            int m_epfd=0;
+            int m_epfd=0;           //成员是红黑树句柄。
             int m_tickleFds[2];
 
             std::atomic<size_t> m_pendingEventCount={0};

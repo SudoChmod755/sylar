@@ -31,7 +31,24 @@ void test1(){
 
     connect(sock,(const sockaddr*)&addr,sizeof(addr));
 }
+sylar::Timer::ptr s_timer;
+void test_timer(){
+    sylar::IOManger iom(2);
+    s_timer=iom.addtimer(500,[](){                              //局部变量版本这里lamda捕获前面的引用,但是reset出错了。
+                                                                //换成全局变量就没事？？？
+                                                                //可能是因为shared_ptr引用计数问题。
+        SYLAR_LOG_INFO(g_logger)<<"hello timer";
+        static int i=0;
+        if(++i==5){
+            //timer->cancel();
+            s_timer->reset(2000,true);
+        }
+    },true);
+
+}
+
 int main(int argc,char** argv){
-    test1();
+    //test1();
+    test_timer();
     return 0;
 }

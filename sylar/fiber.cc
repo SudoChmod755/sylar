@@ -40,9 +40,9 @@ uint64_t Fiber::GetFiberId(){
 
 Fiber::Fiber(){
     m_state=EXEC;
-    SetThis(this);
+    SetThis(this);            //这个是当前进程的主线作为协程。
 
-    if(getcontext(&m_ctx)){
+    if(getcontext(&m_ctx)){               //这个地方？？
         SYLAR_ASSERT2(false,"getcontext");
     }
 

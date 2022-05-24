@@ -10,6 +10,7 @@
 #include<cxxabi.h>
 #include<string>
 #include<vector>
+#include <sys/time.h>
 namespace sylar{
 
     pid_t GetThreadId();
@@ -24,7 +25,8 @@ namespace sylar{
         return s_name;
     }
 
-
+    uint64_t GetCurrentMs();
+    uint64_t GetCurrentUs();
 }
 
 

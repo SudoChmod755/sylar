@@ -11,6 +11,7 @@ set(LIB/SRC
     sylar/fiber.cc
     sylar/scheduler.cc
     sylar/iomanager.cc
+    sylar/timer.cc
     )
 
 include_directories(.)

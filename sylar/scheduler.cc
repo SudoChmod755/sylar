@@ -23,13 +23,13 @@ namespace sylar{
             m_rootThread=sylar::GetThreadId();
             m_threadIds.push_back(m_rootThread);
 
-        }
+        }      //如果是use_caller,设置当前线程的主流是一个协程，设置run的m_rootFiber为另一个（保存在两个thread_local static 变量里）
         else{
             m_rootThread=-1;
 
         }
         m_threadCount=threads;
-    }
+    }           //
     Scheduler:: ~Scheduler(){
         SYLAR_ASSERT(m_stopping);
         if(GetThis()== this){
@@ -52,7 +52,7 @@ namespace sylar{
          SYLAR_ASSERT(m_threads.empty());
          m_threads.resize(m_threadCount);
          for(size_t i=0;i<m_threadCount;++i){
-             m_threads[i].reset(new Thread( (std::bind(&Scheduler::run,this)) ,m_name+"_"+std::to_string(i)));
+             m_threads[i].reset(new Thread( (std::bind(&Scheduler::run,this)) ,m_name+"_"+std::to_string(i)));  //这bind让其他线程可以访问到主线程栈上的sc(this参数)
              m_threadIds.push_back(m_threads[i]->getId());
          }
          lock.unlock();
@@ -69,14 +69,15 @@ namespace sylar{
          ==Fiber::INIT) ){
              SYLAR_LOG_INFO(g_logger)<<this<<" stopped";
              m_stopping=true;
-             if(stopping()){       //判断m_fiber是否为空 等。
+             if(stopping()){       //判断m_fiber是否为空 等。（stopping在子类中被重写）
                  return ;
              }
          }
 
          //bool exit_on_this_fiber=false;
          if(m_rootThread!=-1){
-             SYLAR_ASSERT(GetThis()==this);  //在创建Scheduler的线程中结束。
+             SYLAR_ASSERT(GetThis()==this);  //只有use_call模式
+             //在子类中这里的this指的是父类。（主要看函数在哪个类中实现的）。
              
          }
          else{
@@ -85,7 +86,7 @@ namespace sylar{
 
          m_stopping=true;
          for(size_t i=0;i<m_threadCount;++i){
-             tickle();
+             tickle();   //子类中又会重写。
          }
 
          if(m_rootFiber ){

@@ -59,7 +59,7 @@ namespace sylar{
         SYLAR_ASSERT(!rt);
         contextResize(32);
         start();
-    }
+    } //设置成员变量epfd，监听成员变量tickle_fd[0](管道)可读事件。
 
 
 
@@ -256,18 +256,28 @@ namespace sylar{
         return dynamic_cast<IOManger*>(Scheduler::GetThis());
     }
 
-    void IOManger::tickle() {
-        if(hasIdleThreads()){
+    void IOManger::tickle() {      
+        if(hasIdleThreads()){    //没有idlethread
             return;
         }
         int rt=write(m_tickleFds[1],"T",1);
         SYLAR_ASSERT(rt==1);
 
     }
-    bool IOManger::stopping() {
-        return Scheduler::stopping() 
-        && m_pendingEventCount ==0;
+
+    bool IOManger::stopping(uint64_t& timeout){
+        timeout=getNextTimer();
+        return timeout==~0ull 
+        && m_pendingEventCount==0
+        && Scheduler::stopping();
     }
+
+    bool IOManger::stopping() {
+        uint64_t timeout=0;
+        return stopping(timeout);
+    }
+
+
     void IOManger::idle() {
         epoll_event* events=new epoll_event[64]();
         std::shared_ptr<epoll_event> shared_events(events,[](epoll_event* ptr){
@@ -275,24 +285,45 @@ namespace sylar{
         });
 
         while(true){
-            if(stopping()){
-                SYLAR_LOG_INFO(g_logger)<<"name="<<getName()
-                <<" idle stopping exit";
-                break;
-            }
+            uint64_t next_timeout=0;
+            if(stopping(next_timeout)){
+                
+                    SYLAR_LOG_INFO(g_logger)<<"name="<<getName()
+                    <<" idle stopping exit";
+                    break;
+                }
+            
+
+            
 
             int rt=0;
             do{
                 static const int MAX_TIMEOUT=5000;
-                rt=epoll_wait(m_epfd,events,64,MAX_TIMEOUT);    //前面已经epoll_ctl了。
-                // 这里会阻塞，要用tickle() 发消息来唤醒，之后会让出控制权。
+                if(next_timeout !=~0ull){
+                    next_timeout= (int) next_timeout>MAX_TIMEOUT? MAX_TIMEOUT:next_timeout;
+                }
+                else{
+                    next_timeout=MAX_TIMEOUT;
+                }
+                rt=epoll_wait(m_epfd,events,64,(int)next_timeout);    //前面已经epoll_ctl了。
+                
                 if(rt<0 && errno==EINTR){
-
+                    //系统中断。。。
                 }
                 else{
                     break;
                 }
             }while(true);                                 //epoll_wait.
+
+
+
+            std::vector<std::function<void()> >cbs;
+            listExpiredCb(cbs);
+            if(!cbs.empty()){
+                schedule(cbs.begin(),cbs.end());
+                cbs.clear();
+            }
+
 
              for(int i=0;i<rt;++i){
                  epoll_event& event=events[i];
@@ -350,12 +381,17 @@ namespace sylar{
              auto raw_ptr=cur.get();
              cur.reset();
 
-             raw_ptr->swapOUt();
+             raw_ptr->swapOUt();   //或者用yieldtohold(意味着没结束)。
         }
 
        
 
     }
+
+
+    void IOManger::onTimerInsertedAtFront() {
+        tickle();
+    } 
 
 
 }

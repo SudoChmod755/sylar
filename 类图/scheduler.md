@@ -1,5 +1,8 @@
 @startuml
 Scheduler "1"*--"m" Scheduler::FiberAndThread
+Scheduler <|-- IOManger
+
+
 class Scheduler{
     -MutexType m_mutex
     -vector<Thread::ptr> m_threads
@@ -31,6 +34,11 @@ class Scheduler::FiberAndThread{
         +int thread;
         +void reset()
 }
+
+class IOManger{
+
+}
+
 
 
 

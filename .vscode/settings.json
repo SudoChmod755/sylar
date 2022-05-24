@@ -55,6 +55,8 @@
         "unordered_set": "cpp",
         "iomanip": "cpp",
         "cfenv": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp"
     }
 }

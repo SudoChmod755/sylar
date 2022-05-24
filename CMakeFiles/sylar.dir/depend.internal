@@ -91,6 +91,7 @@ CMakeFiles/sylar.dir/sylar/iomanager.cc.o
  /home/sz123/workspace/sylar/sylar/singleton.h
  /home/sz123/workspace/sylar/sylar/sylar.h
  /home/sz123/workspace/sylar/sylar/thread.h
+ /home/sz123/workspace/sylar/sylar/timer.h
  /home/sz123/workspace/sylar/sylar/util.h
  /home/sz123/yaml-cpp/include/yaml-cpp/binary.h
  /home/sz123/yaml-cpp/include/yaml-cpp/dll.h
@@ -175,6 +176,11 @@ CMakeFiles/sylar.dir/sylar/thread.cc.o
  /home/sz123/workspace/sylar/sylar/singleton.h
  /home/sz123/workspace/sylar/sylar/thread.cc
  /home/sz123/workspace/sylar/sylar/thread.h
+ /home/sz123/workspace/sylar/sylar/util.h
+CMakeFiles/sylar.dir/sylar/timer.cc.o
+ /home/sz123/workspace/sylar/sylar/thread.h
+ /home/sz123/workspace/sylar/sylar/timer.cc
+ /home/sz123/workspace/sylar/sylar/timer.h
  /home/sz123/workspace/sylar/sylar/util.h
 CMakeFiles/sylar.dir/sylar/util.cc.o
  /home/sz123/workspace/sylar/sylar/fiber.h
