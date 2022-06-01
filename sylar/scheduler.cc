@@ -1,6 +1,7 @@
 #include "scheduler.h"
 #include "log.h"
 #include "macro.h"
+#include "hook.h"
 namespace sylar{
     static sylar::Logger::ptr g_logger=SYLAR_LOG_NAME("system");
 
@@ -127,6 +128,7 @@ namespace sylar{
      }
      void Scheduler::run(){
         SYLAR_LOG_INFO(g_logger)<<"szyshs run";
+        set_hook_enable(true);
         Fiber::GetThis();   
         setThis();
         if(sylar::GetThreadId()!=m_rootThread)

@@ -21,7 +21,7 @@ namespace sylar{
     class SingleTon{
         public:
             static T* GetInstance(){
-                static T v;
+                static T v;        //调用这个函数才初始化
                 return &v;
             }
 

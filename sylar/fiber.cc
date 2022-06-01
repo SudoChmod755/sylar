@@ -167,6 +167,7 @@ void Fiber::YieldToReady(){
 };
 //协程切换到后台，并且设置为Hold状态
 void Fiber::YieldToHold(){
+    SYLAR_LOG_INFO(g_logger)<<"yield";
     Fiber:: ptr cur= GetThis();
     cur->m_state=HOLD;
     cur->swapOUt();
