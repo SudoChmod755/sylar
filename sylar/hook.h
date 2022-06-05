@@ -5,6 +5,9 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <sys/uio.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+
 
 namespace sylar{
     bool is_hook_enable();

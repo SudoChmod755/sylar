@@ -38,6 +38,7 @@ CMakeFiles/test_util.dir/tests/test_util.cc.o
  sylar/fiber.h
  sylar/log.h
  sylar/macro.h
+ sylar/noncopyable.h
  sylar/scheduler.h
  sylar/singleton.h
  sylar/sylar.h

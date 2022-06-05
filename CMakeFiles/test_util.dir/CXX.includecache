@@ -434,6 +434,8 @@ assert.h
 util.h
 sylar/util.h
 
+sylar/noncopyable.h
+
 sylar/scheduler.h
 memory
 -
@@ -483,6 +485,8 @@ stdint.h
 -
 atomic
 -
+noncopyable.h
+sylar/noncopyable.h
 
 sylar/util.h
 sys/syscall.h

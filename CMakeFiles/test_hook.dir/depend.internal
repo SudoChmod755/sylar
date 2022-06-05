@@ -40,6 +40,7 @@ CMakeFiles/test_hook.dir/tests/test_hook.cc.o
  sylar/iomanager.h
  sylar/log.h
  sylar/macro.h
+ sylar/noncopyable.h
  sylar/scheduler.h
  sylar/singleton.h
  sylar/sylar.h

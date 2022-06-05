@@ -15,6 +15,14 @@ sylar/log.h
 /home/sz123/workspace/sylar/tests/sylar/log.h
 sylar/sylar.h
 /home/sz123/workspace/sylar/tests/sylar/sylar.h
+sys/types.h
+-
+sys/socket.h
+-
+fcntl.h
+-
+arpa/inet.h
+-
 
 /home/sz123/yaml-cpp/include/yaml-cpp/binary.h
 string
@@ -411,6 +419,10 @@ sys/types.h
 -
 sys/uio.h
 -
+fcntl.h
+-
+sys/ioctl.h
+-
 
 sylar/iomanager.h
 scheduler.h
@@ -457,6 +469,8 @@ assert.h
 -
 util.h
 sylar/util.h
+
+sylar/noncopyable.h
 
 sylar/scheduler.h
 memory
@@ -507,6 +521,8 @@ stdint.h
 -
 atomic
 -
+noncopyable.h
+sylar/noncopyable.h
 
 sylar/timer.h
 memory

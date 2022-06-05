@@ -36,6 +36,7 @@ CMakeFiles/test_config.dir/tests/test_config.cc.o
  /home/sz123/yaml-cpp/include/yaml-cpp/yaml.h
  sylar/config.h
  sylar/log.h
+ sylar/noncopyable.h
  sylar/singleton.h
  sylar/thread.h
  sylar/util.h

@@ -422,6 +422,8 @@ sylar/singleton.h
 thread.h
 sylar/thread.h
 
+sylar/noncopyable.h
+
 sylar/singleton.h
 memory
 -
@@ -441,6 +443,8 @@ stdint.h
 -
 atomic
 -
+noncopyable.h
+sylar/noncopyable.h
 
 sylar/util.h
 sys/syscall.h

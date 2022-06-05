@@ -13,6 +13,7 @@ set(LIB/SRC
     sylar/iomanager.cc
     sylar/timer.cc
     sylar/hook.cc
+    sylar/fd_manager.cc
     )
 
 include_directories(.)
