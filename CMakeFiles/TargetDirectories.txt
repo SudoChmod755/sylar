@@ -1,5 +1,6 @@
 /home/sz123/workspace/sylar/CMakeFiles/test_iomanager.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_scheduler.dir
+/home/sz123/workspace/sylar/CMakeFiles/test_address.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_fiber.dir
 /home/sz123/workspace/sylar/CMakeFiles/rebuild_cache.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_util.dir
