@@ -423,6 +423,10 @@ fcntl.h
 -
 sys/ioctl.h
 -
+unistd.h
+-
+stdint.h
+-
 
 sylar/iomanager.h
 scheduler.h

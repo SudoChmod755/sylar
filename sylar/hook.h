@@ -7,8 +7,8 @@
 #include <sys/uio.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
-
-
+#include <unistd.h>
+#include <stdint.h>
 namespace sylar{
     bool is_hook_enable();
     void set_hook_enable(bool flag);
@@ -85,6 +85,8 @@ extern "C"{
 
     typedef int (*setsockopt_fun)(int sockfd, int level, int optname, const void *optval, socklen_t optlen);
     extern setsockopt_fun setsockopt_f;
+
+    extern int connect_with_timeout(int fd, const struct sockaddr* addr, socklen_t addrlen, uint64_t timeout_ms);
     
 }
 

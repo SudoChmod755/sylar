@@ -38,6 +38,7 @@ namespace sylar{
             int getFamily() const;
 
             virtual const sockaddr* getAddr() const =0;
+            virtual sockaddr* getAddr() =0;
             virtual socklen_t getAddrLen() const =0;
 
             virtual std::ostream& insert(std::ostream& os) const =0;
@@ -53,14 +54,14 @@ namespace sylar{
         public:
             typedef std::shared_ptr<IPAddress> ptr;
 
-            static IPAddress::ptr Create(const char* address,uint32_t port =0);
+            static IPAddress::ptr Create(const char* address,uint16_t port =0);
             
             virtual IPAddress::ptr broadcastAddress(uint32_t prefix_len)=0;
             virtual IPAddress::ptr networkAddress(uint32_t prefix_len)=0;
             virtual IPAddress::ptr subnetMask(uint32_t prefix_len)=0;
 
             virtual uint32_t getPort() const =0;
-            virtual void setPort(uint32_t v)=0; 
+            virtual void setPort(uint16_t v)=0; 
 
     };
 
@@ -68,11 +69,12 @@ namespace sylar{
     class IPv4Address: public IPAddress{
     public:
         typedef std::shared_ptr<IPv4Address> ptr;
-        IPv4Address(uint32_t address=INADDR_ANY,uint32_t port=0);  //这个可以看做是默认的构造函数（可以不用传入参数）
+        IPv4Address(uint32_t address=INADDR_ANY,uint16_t port=0);  //这个可以看做是默认的构造函数（可以不用传入参数）
         IPv4Address(const sockaddr_in& address);
-        static IPv4Address::ptr Create(const char* address,uint32_t port=0);
+        static IPv4Address::ptr Create(const char* address,uint16_t port=0);
 
         const sockaddr* getAddr() const override;
+        sockaddr* getAddr() override;
         socklen_t getAddrLen() const override;
         std::ostream& insert(std::ostream& os) const override;
 
@@ -81,7 +83,7 @@ namespace sylar{
         IPAddress::ptr subnetMask(uint32_t prefix_len) override;
 
         uint32_t getPort() const override;
-        void setPort(uint32_t v) override;
+        void setPort(uint16_t v) override;
 
     private:
         sockaddr_in m_addr;
@@ -92,11 +94,12 @@ namespace sylar{
     class IPv6Address: public IPAddress{
     public:
         typedef std::shared_ptr<IPv6Address> ptr;
-        static IPv6Address::ptr Create(const char* address,uint32_t port=0);
+        static IPv6Address::ptr Create(const char* address,uint16_t port=0);
         IPv6Address(const sockaddr_in6& addr);
-        IPv6Address(const uint8_t address[16],uint32_t port=0);
+        IPv6Address(const uint8_t address[16],uint16_t port=0);
         IPv6Address();
         const sockaddr* getAddr() const override;
+        sockaddr* getAddr() override;
         socklen_t getAddrLen() const override;
         std::ostream& insert(std::ostream& os) const override;
 
@@ -105,7 +108,7 @@ namespace sylar{
         IPAddress::ptr subnetMask(uint32_t prefix_len) override;
 
         uint32_t getPort() const override;
-        void setPort(uint32_t v) override;
+        void setPort(uint16_t v) override;
 
     private:
         sockaddr_in6 m_addr;
@@ -119,8 +122,10 @@ namespace sylar{
         UnixAddress(const std::string& path);
         UnixAddress();
         const sockaddr* getAddr() const override;
+        sockaddr* getAddr() override;
         socklen_t getAddrLen() const override;
         std::ostream& insert(std::ostream& os) const override;
+        void setAddrLen(uint32_t v);
 
     private:
         sockaddr_un m_addr;
@@ -135,6 +140,7 @@ namespace sylar{
             UnknownAddress();
             UnknownAddress(const sockaddr& addr);
             const sockaddr* getAddr() const override;
+            sockaddr* getAddr() override;
             socklen_t getAddrLen() const override;
             std::ostream& insert(std::ostream& os) const override;
 

@@ -1,3 +1,4 @@
+/home/sz123/workspace/sylar/CMakeFiles/test_socket.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_iomanager.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_scheduler.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_address.dir
