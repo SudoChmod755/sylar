@@ -1,8 +1,8 @@
+/home/sz123/workspace/sylar/CMakeFiles/rebuild_cache.dir
+/home/sz123/workspace/sylar/CMakeFiles/edit_cache.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_hook.dir
 /home/sz123/workspace/sylar/CMakeFiles/test.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_thread.dir
-/home/sz123/workspace/sylar/CMakeFiles/rebuild_cache.dir
-/home/sz123/workspace/sylar/CMakeFiles/edit_cache.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_config.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_bytearray.dir
 /home/sz123/workspace/sylar/CMakeFiles/sylar.dir
@@ -12,3 +12,4 @@
 /home/sz123/workspace/sylar/CMakeFiles/test_scheduler.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_iomanager.dir
 /home/sz123/workspace/sylar/CMakeFiles/test_socket.dir
+/home/sz123/workspace/sylar/CMakeFiles/test_http.dir

@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/sz123/workspace/sylar/sylar/fd_manager.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/fd_manager.cc.o"
   "/home/sz123/workspace/sylar/sylar/fiber.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/fiber.cc.o"
   "/home/sz123/workspace/sylar/sylar/hook.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/hook.cc.o"
+  "/home/sz123/workspace/sylar/sylar/http/http.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/http/http.cc.o"
   "/home/sz123/workspace/sylar/sylar/iomanager.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/iomanager.cc.o"
   "/home/sz123/workspace/sylar/sylar/log.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/log.cc.o"
   "/home/sz123/workspace/sylar/sylar/scheduler.cc" "/home/sz123/workspace/sylar/CMakeFiles/sylar.dir/sylar/scheduler.cc.o"

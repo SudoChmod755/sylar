@@ -156,7 +156,7 @@ retry:
 extern "C"{
     #define XX(name) name ## _fun name ## _f=nullptr;
         HOOK_FUN(XX)
-    #undef XX           //声明
+    #undef XX           //定义
 
     
 

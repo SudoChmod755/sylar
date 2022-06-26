@@ -230,6 +230,9 @@ CMakeFiles/sylar.dir/sylar/hook.cc.o
  /home/sz123/yaml-cpp/include/yaml-cpp/stlemitter.h
  /home/sz123/yaml-cpp/include/yaml-cpp/traits.h
  /home/sz123/yaml-cpp/include/yaml-cpp/yaml.h
+CMakeFiles/sylar.dir/sylar/http/http.cc.o
+ /home/sz123/workspace/sylar/sylar/http/http.cc
+ /home/sz123/workspace/sylar/sylar/http/http.h
 CMakeFiles/sylar.dir/sylar/iomanager.cc.o
  /home/sz123/workspace/sylar/sylar/config.h
  /home/sz123/workspace/sylar/sylar/fiber.h
