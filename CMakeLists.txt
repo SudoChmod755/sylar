@@ -5,9 +5,11 @@ set(CMAKE_VERBOSE_MAKEFILE ON)   #输出具体的信息
 set(CMAKE_CXX_FLAGS "$ENV{CXXFLAGS} -rdynamic -g -O0 -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function  -Wno-builtin-macro-redefined")
 set(LIB/SRC
     sylar/http/http.cc
+    sylar/http/http_parser.cc
     sylar/bytearray.cc
     sylar/socket.cc
     sylar/address.cc
+    sylar/tcp_server.cc
     sylar/log.cc
     sylar/util.cc
     sylar/config.cc
@@ -18,6 +20,8 @@ set(LIB/SRC
     sylar/timer.cc
     sylar/hook.cc
     sylar/fd_manager.cc
+    sylar/http/http11_parser.rl.cc
+    sylar/http/httpclient_parser.rl.cc 
     )
 
 include_directories(.)
@@ -94,6 +98,11 @@ add_executable(test_http tests/test_http.cc)
 add_dependencies(test_http sylar )         
 force_redefine_file_macro_for_sources(test_http)
 target_link_libraries(test_http ${LIBS})
+
+add_executable(test_http_parser tests/test_http_parser.cc)
+add_dependencies(test_http_parser sylar )         
+force_redefine_file_macro_for_sources(test_http_parser)
+target_link_libraries(test_http_parser ${LIBS})
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)

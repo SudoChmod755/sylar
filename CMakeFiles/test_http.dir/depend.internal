@@ -4,6 +4,9 @@
 CMakeFiles/test_http.dir/tests/test_http.cc.o
  /home/sz123/workspace/sylar/tests/test_http.cc
  sylar/http/http.h
+ sylar/http/http11_common.h
+ sylar/http/http11_parser.h
+ sylar/http/httpclient_parser.h
  sylar/log.h
  sylar/noncopyable.h
  sylar/singleton.h

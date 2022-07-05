@@ -4,6 +4,8 @@
 #include<string>
 #include<map>
 #include<boost/lexical_cast.hpp>
+#include "http11_parser.h"
+#include "httpclient_parser.h"
 namespace sylar{
 namespace http{
     /* Request Methods */
@@ -256,8 +258,8 @@ class HttpRequest {
             return getAs(m_cookies,key,def);
         }
 
-        std::ostream& dump(std::ostream& os);
-    
+        std::ostream& dump(std::ostream& os) const ;
+        std::string toString() const ;
 
 
     private:
@@ -312,8 +314,8 @@ class HttpResponse{
             return getAs(m_headers,key,def);
         }
 
-        std::ostream& dump(std::ostream& os);
-
+        std::ostream& dump(std::ostream& os) const ;
+        std::string toString() const ;
 
     private:
         HttpStatus m_status;
@@ -324,6 +326,8 @@ class HttpResponse{
         MapType m_headers;
 
 };
+
+
 
 } }
 
