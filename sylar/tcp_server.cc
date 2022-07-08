@@ -64,6 +64,7 @@ void TcpServer::startAccept(Socket::ptr sock){
     while(!m_isStop){
         Socket::ptr client=sock->accept();
         if(client){
+            client->setRecvtimeout(m_readTimeout);
             m_worker->schedule(std::bind(&TcpServer::handleClient,shared_from_this(),client));
         }
         else{
@@ -96,7 +97,7 @@ void TcpServer::stop(){
 }
 
 void TcpServer::handleClient(Socket::ptr client){
-    SYLAR_LOG_INFO(g_logger)<<"handleClinet "<<client;
+    SYLAR_LOG_INFO(g_logger)<<"handleClinet "<<*client;
 }
 
 }

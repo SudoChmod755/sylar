@@ -284,6 +284,20 @@ CMakeFiles/sylar.dir/sylar/http/http_parser.cc.o: sylar/singleton.h
 CMakeFiles/sylar.dir/sylar/http/http_parser.cc.o: sylar/thread.h
 CMakeFiles/sylar.dir/sylar/http/http_parser.cc.o: sylar/util.h
 
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/http/http.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/http/http11_common.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/http/http11_parser.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/http/http_parser.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/http/http_session.cc
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/http/http_session.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/http/httpclient_parser.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/address.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/bytearray.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/noncopyable.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/socket.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/socket_stream.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o: sylar/stream.h
+
 CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.o: sylar/http/http11_common.h
 CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.o: sylar/http/httpclient_parser.h
 CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.o: sylar/http/httpclient_parser.rl.cc
@@ -431,6 +445,18 @@ CMakeFiles/sylar.dir/sylar/socket.cc.o: /home/sz123/yaml-cpp/include/yaml-cpp/pa
 CMakeFiles/sylar.dir/sylar/socket.cc.o: /home/sz123/yaml-cpp/include/yaml-cpp/stlemitter.h
 CMakeFiles/sylar.dir/sylar/socket.cc.o: /home/sz123/yaml-cpp/include/yaml-cpp/traits.h
 CMakeFiles/sylar.dir/sylar/socket.cc.o: /home/sz123/yaml-cpp/include/yaml-cpp/yaml.h
+
+CMakeFiles/sylar.dir/sylar/socket_stream.cc.o: sylar/address.h
+CMakeFiles/sylar.dir/sylar/socket_stream.cc.o: sylar/bytearray.h
+CMakeFiles/sylar.dir/sylar/socket_stream.cc.o: sylar/noncopyable.h
+CMakeFiles/sylar.dir/sylar/socket_stream.cc.o: sylar/socket.h
+CMakeFiles/sylar.dir/sylar/socket_stream.cc.o: sylar/socket_stream.cc
+CMakeFiles/sylar.dir/sylar/socket_stream.cc.o: sylar/socket_stream.h
+CMakeFiles/sylar.dir/sylar/socket_stream.cc.o: sylar/stream.h
+
+CMakeFiles/sylar.dir/sylar/stream.cc.o: sylar/bytearray.h
+CMakeFiles/sylar.dir/sylar/stream.cc.o: sylar/stream.cc
+CMakeFiles/sylar.dir/sylar/stream.cc.o: sylar/stream.h
 
 CMakeFiles/sylar.dir/sylar/tcp_server.cc.o: sylar/address.h
 CMakeFiles/sylar.dir/sylar/tcp_server.cc.o: sylar/config.h

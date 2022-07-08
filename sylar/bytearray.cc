@@ -419,10 +419,13 @@ namespace sylar{
     }
 
     void ByteArray::setPosition(size_t v){
-        if(v>m_size){
+        if(v>m_capacity){
             throw std::out_of_range("set_position out of range");
         }
         m_position=v;
+        if(m_position>m_size){
+            m_size=m_position;
+        }
         m_cur=m_root;
         while(v>m_cur->size){
             v-=m_cur->size;
@@ -432,6 +435,7 @@ namespace sylar{
             m_cur=m_cur->next;
         }
     }
+
     
     
 

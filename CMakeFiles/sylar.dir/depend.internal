@@ -284,6 +284,20 @@ CMakeFiles/sylar.dir/sylar/http/http_parser.cc.o
  sylar/singleton.h
  sylar/thread.h
  sylar/util.h
+CMakeFiles/sylar.dir/sylar/http/http_session.cc.o
+ /home/sz123/workspace/sylar/sylar/http/http.h
+ /home/sz123/workspace/sylar/sylar/http/http11_common.h
+ /home/sz123/workspace/sylar/sylar/http/http11_parser.h
+ /home/sz123/workspace/sylar/sylar/http/http_parser.h
+ /home/sz123/workspace/sylar/sylar/http/http_session.cc
+ /home/sz123/workspace/sylar/sylar/http/http_session.h
+ /home/sz123/workspace/sylar/sylar/http/httpclient_parser.h
+ sylar/address.h
+ sylar/bytearray.h
+ sylar/noncopyable.h
+ sylar/socket.h
+ sylar/socket_stream.h
+ sylar/stream.h
 CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.o
  /home/sz123/workspace/sylar/sylar/http/http11_common.h
  /home/sz123/workspace/sylar/sylar/http/httpclient_parser.h
@@ -432,6 +446,18 @@ CMakeFiles/sylar.dir/sylar/socket.cc.o
  /home/sz123/yaml-cpp/include/yaml-cpp/stlemitter.h
  /home/sz123/yaml-cpp/include/yaml-cpp/traits.h
  /home/sz123/yaml-cpp/include/yaml-cpp/yaml.h
+CMakeFiles/sylar.dir/sylar/socket_stream.cc.o
+ /home/sz123/workspace/sylar/sylar/address.h
+ /home/sz123/workspace/sylar/sylar/bytearray.h
+ /home/sz123/workspace/sylar/sylar/noncopyable.h
+ /home/sz123/workspace/sylar/sylar/socket.h
+ /home/sz123/workspace/sylar/sylar/socket_stream.cc
+ /home/sz123/workspace/sylar/sylar/socket_stream.h
+ /home/sz123/workspace/sylar/sylar/stream.h
+CMakeFiles/sylar.dir/sylar/stream.cc.o
+ /home/sz123/workspace/sylar/sylar/bytearray.h
+ /home/sz123/workspace/sylar/sylar/stream.cc
+ /home/sz123/workspace/sylar/sylar/stream.h
 CMakeFiles/sylar.dir/sylar/tcp_server.cc.o
  /home/sz123/workspace/sylar/sylar/address.h
  /home/sz123/workspace/sylar/sylar/config.h

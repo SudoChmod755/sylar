@@ -85,6 +85,7 @@ namespace sylar{
 
             size_t getPosition() const {return m_position;}
             void setPosition(size_t v);
+            
             size_t getBaseSize() const {return m_baseSize;}
             size_t getReadSize() const {return m_size-m_position;}
 

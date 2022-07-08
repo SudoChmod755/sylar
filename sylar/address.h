@@ -149,7 +149,7 @@ namespace sylar{
     };
 
 
-
+std::ostream& operator<<(std::ostream& os,const Address& addr);
 }
 
 #endif
