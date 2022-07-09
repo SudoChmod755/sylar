@@ -192,7 +192,7 @@ class HttpRequest {
             return m_body;
         }
 
-               
+        bool isClose() const {return m_close;}
         const MapType& getHeaders() const{return  m_headers;}
         const MapType& getParams() const{return  m_params;}
         const MapType& getCookies() const{return  m_cookies;}

@@ -1,4 +1,4 @@
-#ifndef __SYLAR_SOCKET_H__
+#ifndef __SYLAR_SOCKET_H_
 #define __SYLAR_SOCKET_H_
 #include<memory>
 #include "address.h"

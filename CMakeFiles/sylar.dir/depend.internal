@@ -284,6 +284,64 @@ CMakeFiles/sylar.dir/sylar/http/http_parser.cc.o
  sylar/singleton.h
  sylar/thread.h
  sylar/util.h
+CMakeFiles/sylar.dir/sylar/http/http_server.cc.o
+ /home/sz123/workspace/sylar/sylar/http/http.h
+ /home/sz123/workspace/sylar/sylar/http/http11_common.h
+ /home/sz123/workspace/sylar/sylar/http/http11_parser.h
+ /home/sz123/workspace/sylar/sylar/http/http_server.cc
+ /home/sz123/workspace/sylar/sylar/http/http_server.h
+ /home/sz123/workspace/sylar/sylar/http/http_session.h
+ /home/sz123/workspace/sylar/sylar/http/httpclient_parser.h
+ /home/sz123/workspace/sylar/sylar/http/servlet.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/binary.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/dll.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/emitter.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/emitterdef.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/emittermanip.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/emitterstyle.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/exceptions.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/mark.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/convert.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/detail/impl.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/detail/iterator.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/detail/iterator_fwd.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/detail/memory.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/detail/node.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/detail/node_data.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/detail/node_iterator.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/detail/node_ref.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/emit.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/impl.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/iterator.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/node.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/parse.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/ptr.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/node/type.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/noexcept.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/null.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/ostream_wrapper.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/parser.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/stlemitter.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/traits.h
+ /home/sz123/yaml-cpp/include/yaml-cpp/yaml.h
+ sylar/address.h
+ sylar/bytearray.h
+ sylar/config.h
+ sylar/fiber.h
+ sylar/iomanager.h
+ sylar/log.h
+ sylar/macro.h
+ sylar/noncopyable.h
+ sylar/scheduler.h
+ sylar/singleton.h
+ sylar/socket.h
+ sylar/socket_stream.h
+ sylar/stream.h
+ sylar/sylar.h
+ sylar/tcp_server.h
+ sylar/thread.h
+ sylar/timer.h
+ sylar/util.h
 CMakeFiles/sylar.dir/sylar/http/http_session.cc.o
  /home/sz123/workspace/sylar/sylar/http/http.h
  /home/sz123/workspace/sylar/sylar/http/http11_common.h
@@ -302,6 +360,21 @@ CMakeFiles/sylar.dir/sylar/http/httpclient_parser.rl.cc.o
  /home/sz123/workspace/sylar/sylar/http/http11_common.h
  /home/sz123/workspace/sylar/sylar/http/httpclient_parser.h
  /home/sz123/workspace/sylar/sylar/http/httpclient_parser.rl.cc
+CMakeFiles/sylar.dir/sylar/http/servlet.cc.o
+ /home/sz123/workspace/sylar/sylar/http/http.h
+ /home/sz123/workspace/sylar/sylar/http/http11_common.h
+ /home/sz123/workspace/sylar/sylar/http/http11_parser.h
+ /home/sz123/workspace/sylar/sylar/http/http_session.h
+ /home/sz123/workspace/sylar/sylar/http/httpclient_parser.h
+ /home/sz123/workspace/sylar/sylar/http/servlet.cc
+ /home/sz123/workspace/sylar/sylar/http/servlet.h
+ sylar/address.h
+ sylar/bytearray.h
+ sylar/noncopyable.h
+ sylar/socket.h
+ sylar/socket_stream.h
+ sylar/stream.h
+ sylar/thread.h
 CMakeFiles/sylar.dir/sylar/iomanager.cc.o
  /home/sz123/workspace/sylar/sylar/config.h
  /home/sz123/workspace/sylar/sylar/fiber.h
